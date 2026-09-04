@@ -167,6 +167,12 @@ details p { max-width: 620px; margin: -5px 0 17px; color: var(--muted); font-siz
 .related-tool-link:hover { border-color: #4b6385; background: rgba(255,255,255,.04); }
 .compare-page .example-card code, .compare-page .how-card code { color: var(--accent-strong); font-family: "SFMono-Regular", Consolas, monospace; }
 .controls-caption { color: var(--subtle); font-size: 11px; }
+.mode-control { display: flex; align-items: center; gap: 13px; margin-bottom: 18px; }
+.mode-label { color: var(--muted); font-size: 12px; font-weight: 750; }
+.mode-tabs { display: flex; gap: 5px; padding: 4px; border: 1px solid var(--line); border-radius: 9px; background: rgba(11,19,34,.7); }
+.mode-button { padding: 7px 11px; border: 1px solid transparent; border-radius: 6px; color: var(--muted); background: transparent; font-size: 11px; font-weight: 700; }
+.mode-button:hover { color: var(--ink); background: rgba(255,255,255,.04); }
+.mode-button.is-active { border-color: rgba(118,225,192,.24); color: var(--accent-strong); background: rgba(118,225,192,.1); }
 .minify-metrics { display: flex; gap: 9px; margin-top: 20px; padding-top: 17px; border-top: 1px solid var(--line); }
 .minify-metrics > div { display: flex; flex-direction: column; gap: 2px; min-width: 100px; padding: 9px 12px; border-radius: 8px; background: rgba(255,255,255,.045); }
 .minify-metrics span { color: var(--subtle); font-size: 10px; text-transform: uppercase; letter-spacing: .06em; }
@@ -191,6 +197,9 @@ details p { max-width: 620px; margin: -5px 0 17px; color: var(--muted); font-siz
   .result-toolbar { align-items: flex-start; flex-direction: column; }
   .filter-tabs { width: 100%; }
   .filter-button { flex: 1; justify-content: center; }
+  .mode-control { align-items: stretch; flex-direction: column; gap: 7px; }
+  .mode-tabs { width: 100%; }
+  .mode-button { flex: 1; }
   .controls-caption { order: 2; }
   .minify-metrics { display: grid; grid-template-columns: repeat(3, 1fr); }
   .minify-metrics > div { min-width: 0; }
