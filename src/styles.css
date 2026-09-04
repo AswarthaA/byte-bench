@@ -22,14 +22,22 @@ button, textarea, select { font: inherit; }
 button { cursor: pointer; }
 button:focus-visible, textarea:focus-visible, select:focus-visible, pre:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
-.site-header, .site-footer { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
-.site-header { display: flex; justify-content: space-between; align-items: center; padding: 30px 0 25px; }
+.site-header, .site-footer, .ad-slot { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+.site-header { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; padding: 30px 0 25px; }
 .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); text-decoration: none; }
 .brand-mark { display: grid; place-items: center; width: 35px; height: 35px; border: 1px solid #3b8a7b; border-radius: 10px; color: var(--accent); font-size: 22px; }
 .brand strong, .brand small { display: block; line-height: 1.1; }
 .brand strong { letter-spacing: -0.02em; }
 .brand small { margin-top: 4px; color: var(--subtle); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
 .header-note { color: var(--subtle); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; }
+.site-nav { display: flex; justify-content: center; align-items: center; gap: 4px; }
+.site-nav-link { padding: 8px 11px; border: 1px solid transparent; border-radius: 8px; color: var(--muted); font-size: 12px; font-weight: 750; text-decoration: none; }
+.site-nav-link:hover { border-color: var(--line); color: var(--ink); background: rgba(255,255,255,.04); }
+.site-nav-link.is-active { border-color: rgba(118,225,192,.24); color: var(--accent-strong); background: rgba(118,225,192,.08); }
+
+.ad-slot { display: grid; place-items: center; border: 1px dashed rgba(118,225,192,.24); border-radius: 12px; color: var(--subtle); background: rgba(17, 26, 42, .36); font-size: 10px; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
+.ad-slot-banner { min-height: 90px; margin-bottom: 20px; }
+.ad-slot-inline { width: 100%; min-height: 180px; margin: 24px 0 28px; }
 
 .page-shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 48px 0 78px; }
 .hero { max-width: 760px; margin-bottom: 38px; }
@@ -159,7 +167,9 @@ details p { max-width: 620px; margin: -5px 0 17px; color: var(--muted); font-siz
 
 @media (max-width: 720px) {
   .site-header, .site-footer, .page-shell { width: min(100% - 30px, 1120px); }
-  .site-header { padding-top: 20px; }
+  .ad-slot { width: min(100% - 30px, 1120px); }
+  .site-header { grid-template-columns: 1fr auto; gap: 14px; padding-top: 20px; }
+  .site-nav { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; overflow-x: auto; padding-bottom: 2px; }
   .page-shell { padding-top: 38px; }
   .header-note { display: none; }
   .workspace-grid, .help-grid, .faq-section, .related-tools { grid-template-columns: 1fr; }

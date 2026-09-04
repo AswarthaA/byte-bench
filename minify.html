@@ -11,8 +11,17 @@
   <body>
     <header class="site-header">
       <a class="brand" href="./" aria-label="ByteBench home"><span class="brand-mark" aria-hidden="true">⌘</span><span><strong>ByteBench</strong><small>Your digital workbench</small></span></a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a class="site-nav-link" href="./">Formatter</a>
+        <a class="site-nav-link" href="./compare.html">Compare</a>
+        <a class="site-nav-link is-active" href="./minify.html" aria-current="page">Minifier</a>
+      </nav>
       <span class="header-note">Private by default</span>
     </header>
+
+    <aside class="ad-slot ad-slot-banner" aria-label="Advertisement">
+      <span>Advertisement</span>
+    </aside>
 
     <main class="page-shell minify-page">
       <section class="hero" aria-labelledby="page-title">
@@ -36,6 +45,10 @@
         <div class="utility-actions" aria-label="Result actions"><button class="utility-button" id="copy-json" type="button" disabled><span aria-hidden="true">▣</span> Copy</button><button class="utility-button" id="download-json" type="button" disabled><span aria-hidden="true">↓</span> Download</button><button class="utility-button" id="share-tool" type="button"><span aria-hidden="true">↗</span> Share tool</button><button class="utility-button utility-button-muted" id="reset-tool" type="button"><span aria-hidden="true">↺</span> Reset</button></div>
         <div class="status-message" id="status-message" role="status" aria-live="polite">Ready when you are.</div>
       </section>
+
+      <aside class="ad-slot ad-slot-inline" aria-label="Advertisement">
+        <span>Advertisement</span>
+      </aside>
 
       <section class="help-grid" aria-label="JSON minifier guidance"><article class="info-card how-card"><p class="section-kicker">A quick guide</p><h2>What gets removed?</h2><ol class="steps-list"><li><span>01</span><div><strong>Parse</strong><p>ByteBench checks that the input is standard JSON.</p></div></li><li><span>02</span><div><strong>Compact</strong><p>Formatting spaces, tabs, and line breaks are removed.</p></div></li><li><span>03</span><div><strong>Use</strong><p>Copy or download a smaller payload for your next request.</p></div></li></ol></article><article class="info-card example-card"><p class="section-kicker">Example</p><h2>Strings stay untouched</h2><pre><code>{
   "message": "keep  these spaces",
