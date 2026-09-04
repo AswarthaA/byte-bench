@@ -19,11 +19,14 @@ const originalCount = document.querySelector("#original-count");
 const updatedCount = document.querySelector("#updated-count");
 const resultContent = document.querySelector("#result-content");
 const resultMeta = document.querySelector("#result-meta");
+const resultToolbar = document.querySelector("#result-toolbar");
 const statusDot = document.querySelector("#status-dot");
 const statusMessage = document.querySelector("#status-message");
 const copyButton = document.querySelector("#copy-report");
 const downloadButton = document.querySelector("#download-report");
+const filterButtons = [...document.querySelectorAll("[data-filter]")];
 let currentResult = null;
+let activeFilter = "all";
 
 function setStatus(message, type = "neutral") {
   statusMessage.textContent = message;
@@ -38,11 +41,29 @@ function updateCount(element, value) {
 
 function resetResult() {
   currentResult = null;
+  activeFilter = "all";
   resultMeta.textContent = "Waiting for input";
+  resultToolbar.hidden = true;
+  updateFilterButtons({ added: 0, removed: 0, changed: 0, total: 0 });
   resultContent.replaceChildren(Object.assign(document.createElement("p"), { className: "result-placeholder", textContent: "Your comparison will appear here." }));
   copyButton.disabled = true;
   downloadButton.disabled = true;
   setStatus("Ready when you are.");
+}
+
+function updateFilterButtons(counts) {
+  for (const button of filterButtons) {
+    const filter = button.dataset.filter;
+    const count = filter === "all" ? counts.total : counts[filter];
+    button.querySelector("span").textContent = count;
+    button.classList.toggle("is-active", filter === activeFilter);
+    button.setAttribute("aria-pressed", String(filter === activeFilter));
+  }
+}
+
+function setFilter(filter) {
+  activeFilter = filter;
+  if (currentResult) renderResult(currentResult);
 }
 
 function valueElement(value) {
@@ -77,6 +98,7 @@ function createDifferenceItem(difference) {
 
 function renderInvalid(result) {
   resultMeta.textContent = "Needs attention";
+  resultToolbar.hidden = true;
   const list = document.createElement("div");
   list.className = "invalid-list";
   for (const [label, side] of [["Original JSON", result.original], ["Updated JSON", result.updated]]) {
@@ -107,6 +129,8 @@ function renderResult(result) {
 
   const { counts } = result;
   resultMeta.textContent = result.status === "identical" ? "No differences" : `${counts.total} difference${counts.total === 1 ? "" : "s"}`;
+  resultToolbar.hidden = result.status === "identical";
+  updateFilterButtons(counts);
   const summary = document.createElement("div");
   summary.className = `result-summary result-${result.status}`;
   const heading = document.createElement("h3");
@@ -125,9 +149,16 @@ function renderResult(result) {
       stats.append(stat);
     }
     summary.append(stats);
+    const visibleDifferences = activeFilter === "all" ? result.differences : result.differences.filter((difference) => difference.type === activeFilter);
     const list = document.createElement("ul");
     list.className = "difference-list";
-    result.differences.forEach((difference) => list.append(createDifferenceItem(difference)));
+    visibleDifferences.forEach((difference) => list.append(createDifferenceItem(difference)));
+    if (!visibleDifferences.length) {
+      const empty = document.createElement("li");
+      empty.className = "filtered-empty";
+      empty.textContent = `No ${activeFilter} differences in this comparison.`;
+      list.append(empty);
+    }
     summary.append(list);
   }
   resultContent.replaceChildren(summary);
@@ -137,6 +168,7 @@ function renderResult(result) {
 }
 
 function runCompare() {
+  activeFilter = "all";
   renderResult(compareJson(originalInput.value, updatedInput.value));
 }
 
@@ -226,6 +258,7 @@ document.querySelector("#reset-tool").addEventListener("click", () => {
 copyButton.addEventListener("click", copyReport);
 downloadButton.addEventListener("click", downloadReport);
 document.querySelector("#share-tool").addEventListener("click", shareTool);
+filterButtons.forEach((button) => button.addEventListener("click", () => setFilter(button.dataset.filter)));
 
 updateCount(originalCount, originalInput.value);
 updateCount(updatedCount, updatedInput.value);

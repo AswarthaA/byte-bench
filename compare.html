@@ -64,6 +64,15 @@
 
         <div class="comparison-result" aria-labelledby="result-title">
           <div class="result-header"><div class="output-label"><span class="status-dot" id="status-dot" aria-hidden="true"></span><h2 id="result-title">Comparison result</h2></div><span class="panel-meta" id="result-meta">Waiting for input</span></div>
+          <div class="result-toolbar" id="result-toolbar" hidden aria-label="Difference filters">
+            <span class="toolbar-label">Show</span>
+            <div class="filter-tabs" role="group" aria-label="Filter differences">
+              <button class="filter-button is-active" type="button" data-filter="all" aria-pressed="true">All <span>0</span></button>
+              <button class="filter-button" type="button" data-filter="added" aria-pressed="false">Added <span>0</span></button>
+              <button class="filter-button" type="button" data-filter="removed" aria-pressed="false">Removed <span>0</span></button>
+              <button class="filter-button" type="button" data-filter="changed" aria-pressed="false">Changed <span>0</span></button>
+            </div>
+          </div>
           <div id="result-content" class="result-content" aria-live="polite"><p class="result-placeholder">Your comparison will appear here.</p></div>
         </div>
 
