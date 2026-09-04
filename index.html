@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Format and validate JSON privately in your browser with ByteBench." />
+    <meta name="theme-color" content="#0b1220" />
+    <title>JSON Formatter &amp; Validator · ByteBench</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="ByteBench home">
+        <span class="brand-mark" aria-hidden="true">⌘</span>
+        <span>
+          <strong>ByteBench</strong>
+          <small>Your digital workbench</small>
+        </span>
+      </a>
+      <span class="header-note">Private by default</span>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Data &amp; developer tools <span aria-hidden="true">/</span> JSON</p>
+        <h1 id="page-title">JSON Formatter <span>&amp;</span> Validator</h1>
+        <p class="lede">Make messy JSON readable, check it for errors, and keep your data on your device.</p>
+      </section>
+
+      <section class="tool-card" aria-labelledby="workspace-title">
+        <div class="tool-card-header">
+          <div>
+            <p class="section-kicker">Workspace</p>
+            <h2 id="workspace-title">Paste JSON to get started</h2>
+          </div>
+          <button class="text-button" id="load-example" type="button">Load example <span aria-hidden="true">↗</span></button>
+        </div>
+
+        <div class="privacy-note" role="note">
+          <span class="privacy-icon" aria-hidden="true">✦</span>
+          <span><strong>Runs locally in your browser.</strong> Your JSON is not uploaded, saved, or included in sharing.</span>
+        </div>
+
+        <div class="workspace-grid">
+          <div class="panel input-panel">
+            <div class="panel-header">
+              <label for="json-input">Input JSON</label>
+              <span class="panel-meta" id="input-count">0 characters</span>
+            </div>
+            <textarea id="json-input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="input-help" placeholder="Paste your JSON here…"></textarea>
+            <p id="input-help" class="field-help">JSON objects, arrays, and primitives are supported.</p>
+          </div>
+
+          <div class="panel output-panel">
+            <div class="panel-header">
+              <div class="output-label"><span>Formatted JSON</span><span class="status-dot" id="status-dot" aria-hidden="true"></span></div>
+              <span class="panel-meta" id="output-meta">Waiting for input</span>
+            </div>
+            <pre id="json-output" tabindex="0" aria-label="Formatted JSON output">Your formatted JSON will appear here.</pre>
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <div class="indent-control">
+            <label for="indentation">Indentation</label>
+            <select id="indentation">
+              <option value="2">2 spaces</option>
+              <option value="4">4 spaces</option>
+              <option value="tab">Tabs</option>
+            </select>
+          </div>
+          <div class="primary-actions">
+            <button class="button button-secondary" id="validate-json" type="button">Validate JSON</button>
+            <button class="button button-primary" id="format-json" type="button">Format JSON <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+
+        <div class="utility-actions" aria-label="Result actions">
+          <button class="utility-button" id="copy-json" type="button" disabled><span aria-hidden="true">▣</span> Copy</button>
+          <button class="utility-button" id="download-json" type="button" disabled><span aria-hidden="true">↓</span> Download</button>
+          <button class="utility-button" id="share-tool" type="button"><span aria-hidden="true">↗</span> Share tool</button>
+          <button class="utility-button utility-button-muted" id="reset-tool" type="button"><span aria-hidden="true">↺</span> Reset</button>
+        </div>
+
+        <div class="status-message" id="status-message" role="status" aria-live="polite">Ready when you are.</div>
+      </section>
+
+      <section class="help-grid" aria-label="JSON tool guidance">
+        <article class="info-card how-card">
+          <p class="section-kicker">A quick guide</p>
+          <h2>How it works</h2>
+          <ol class="steps-list">
+            <li><span>01</span><div><strong>Paste</strong><p>Add an object, array, or JSON value to the input panel.</p></div></li>
+            <li><span>02</span><div><strong>Check</strong><p>Validate catches syntax issues before you share or ship it.</p></div></li>
+            <li><span>03</span><div><strong>Format</strong><p>Choose an indentation style and copy or download the result.</p></div></li>
+          </ol>
+        </article>
+
+        <article class="info-card example-card">
+          <p class="section-kicker">Example</p>
+          <h2>Valid JSON is delightfully strict</h2>
+          <pre><code>{
+  "tool": "ByteBench",
+  "private": true
+}</code></pre>
+          <p>Use double quotes around keys and text. JSON does not allow comments or trailing commas.</p>
+        </article>
+      </section>
+
+      <section class="faq-section" aria-labelledby="faq-title">
+        <div>
+          <p class="section-kicker">Good to know</p>
+          <h2 id="faq-title">Frequently asked questions</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>Is my JSON sent anywhere?</summary>
+            <p>No. Formatting and validation happen in this page’s browser session. ByteBench does not save the content or put it in a share link.</p>
+          </details>
+          <details>
+            <summary>Why is my JSON invalid?</summary>
+            <p>The most common causes are single quotes, a missing comma or colon, an unclosed bracket, or a trailing comma. The validation message points you toward the likely fix.</p>
+          </details>
+          <details>
+            <summary>What happens with duplicate keys?</summary>
+            <p>JSON permits the text, but parsers generally keep the last value for a repeated key. Avoid duplicates when every value matters.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="related-section" aria-labelledby="related-title">
+        <div class="related-header"><div><p class="section-kicker">More from ByteBench</p><h2 id="related-title">Tools for the next step</h2></div><span class="coming-soon">Coming next</span></div>
+        <div class="related-tools">
+          <a class="related-tool related-tool-link" href="./compare.html"><span class="tool-icon">⇄</span><div><strong>JSON Compare</strong><p>Spot what changed between two documents.</p></div><span class="arrow" aria-hidden="true">→</span></a>
+          <a class="related-tool related-tool-link" href="./minify.html"><span class="tool-icon">#</span><div><strong>JSON Minifier</strong><p>Remove whitespace for compact payloads.</p></div><span class="arrow" aria-hidden="true">→</span></a>
+          <div class="related-tool"><span class="tool-icon">↳</span><div><strong>Base64 Encoder</strong><p>Encode and decode text in a few clicks.</p></div><span class="arrow" aria-hidden="true">→</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><span>© 2026 ByteBench</span><span>Useful tools. No account wall.</span></footer>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>

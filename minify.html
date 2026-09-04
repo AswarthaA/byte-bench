@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Minify JSON privately in your browser with ByteBench." />
+    <meta name="theme-color" content="#0b1220" />
+    <title>JSON Minifier · ByteBench</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="ByteBench home"><span class="brand-mark" aria-hidden="true">⌘</span><span><strong>ByteBench</strong><small>Your digital workbench</small></span></a>
+      <span class="header-note">Private by default</span>
+    </header>
+
+    <main class="page-shell minify-page">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Data &amp; developer tools <span aria-hidden="true">/</span> JSON</p>
+        <h1 id="page-title">JSON <span>Minifier</span></h1>
+        <p class="lede">Remove unnecessary whitespace from JSON while keeping every value and every space inside your strings intact.</p>
+      </section>
+
+      <section class="tool-card" aria-labelledby="workspace-title">
+        <div class="tool-card-header"><div><p class="section-kicker">Workspace</p><h2 id="workspace-title">Make a compact JSON payload</h2></div><button class="text-button" id="load-example" type="button">Load example <span aria-hidden="true">↗</span></button></div>
+        <div class="privacy-note" role="note"><span class="privacy-icon" aria-hidden="true">✦</span><span><strong>Runs locally in your browser.</strong> Your JSON is not uploaded, saved, or included in sharing.</span></div>
+
+        <div class="workspace-grid minify-workspace">
+          <div class="panel input-panel"><div class="panel-header"><label for="json-input">Input JSON</label><span class="panel-meta" id="input-count">0 characters</span></div><textarea id="json-input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="input-help" placeholder="Paste your formatted JSON here…"></textarea><p id="input-help" class="field-help">Whitespace outside quoted strings can be safely removed.</p></div>
+          <div class="panel output-panel"><div class="panel-header"><div class="output-label"><span>Minified JSON</span><span class="status-dot" id="status-dot" aria-hidden="true"></span></div><span class="panel-meta" id="output-meta">Waiting for input</span></div><pre id="json-output" tabindex="0" aria-label="Minified JSON output">Your compact JSON will appear here.</pre></div>
+        </div>
+
+        <div class="controls-row"><span class="controls-caption">Preserves your data. Removes only formatting.</span><div class="primary-actions"><button class="button button-secondary" id="validate-json" type="button">Validate JSON</button><button class="button button-primary" id="minify-json" type="button">Minify JSON <span aria-hidden="true">→</span></button></div></div>
+
+        <div class="minify-metrics" id="minify-metrics" hidden aria-label="Size comparison"><div><span>Original</span><strong id="original-size">—</strong></div><div><span>Minified</span><strong id="minified-size">—</strong></div><div class="metric-highlight"><span>Saved</span><strong id="saved-size">—</strong></div></div>
+        <div class="utility-actions" aria-label="Result actions"><button class="utility-button" id="copy-json" type="button" disabled><span aria-hidden="true">▣</span> Copy</button><button class="utility-button" id="download-json" type="button" disabled><span aria-hidden="true">↓</span> Download</button><button class="utility-button" id="share-tool" type="button"><span aria-hidden="true">↗</span> Share tool</button><button class="utility-button utility-button-muted" id="reset-tool" type="button"><span aria-hidden="true">↺</span> Reset</button></div>
+        <div class="status-message" id="status-message" role="status" aria-live="polite">Ready when you are.</div>
+      </section>
+
+      <section class="help-grid" aria-label="JSON minifier guidance"><article class="info-card how-card"><p class="section-kicker">A quick guide</p><h2>What gets removed?</h2><ol class="steps-list"><li><span>01</span><div><strong>Parse</strong><p>ByteBench checks that the input is standard JSON.</p></div></li><li><span>02</span><div><strong>Compact</strong><p>Formatting spaces, tabs, and line breaks are removed.</p></div></li><li><span>03</span><div><strong>Use</strong><p>Copy or download a smaller payload for your next request.</p></div></li></ol></article><article class="info-card example-card"><p class="section-kicker">Example</p><h2>Strings stay untouched</h2><pre><code>{
+  "message": "keep  these spaces",
+  "active": true
+}</code></pre><p>Whitespace inside quoted strings is data, so it stays exactly as you wrote it.</p></article></section>
+
+      <section class="faq-section" aria-labelledby="faq-title"><div><p class="section-kicker">Good to know</p><h2 id="faq-title">Frequently asked questions</h2></div><div class="faq-list"><details><summary>Will minifying change my JSON values?</summary><p>No. The input is parsed and serialized again, so the result represents the same JSON value. Only presentation whitespace outside strings is removed.</p></details><details><summary>Does minifying make data encrypted?</summary><p>No. Minification only makes JSON smaller and easier to send. It does not hide, secure, or compress the contents cryptographically.</p></details><details><summary>Why did my input fail?</summary><p>JSON requires double quotes, commas between values, and closed braces or brackets. Comments and trailing commas are not standard JSON.</p></details></div></section>
+
+      <section class="related-section" aria-labelledby="related-title"><div class="related-header"><div><p class="section-kicker">More from ByteBench</p><h2 id="related-title">Tools for the next step</h2></div><span class="coming-soon">In the workbench</span></div><div class="related-tools"><a class="related-tool related-tool-link" href="./"><span class="tool-icon">⌘</span><div><strong>JSON Formatter</strong><p>Make one document readable and valid.</p></div><span class="arrow" aria-hidden="true">→</span></a><a class="related-tool related-tool-link" href="./compare.html"><span class="tool-icon">⇄</span><div><strong>JSON Compare</strong><p>Spot what changed between two documents.</p></div><span class="arrow" aria-hidden="true">→</span></a><div class="related-tool"><span class="tool-icon">↳</span><div><strong>Base64 Encoder</strong><p>Encode and decode text in a few clicks.</p></div><span class="arrow" aria-hidden="true">→</span></div></div></section>
+    </main>
+    <footer class="site-footer"><span>© 2026 ByteBench</span><span>Useful tools. No account wall.</span></footer>
+    <script type="module" src="./src/minify-app.js"></script>
+  </body>
+</html>

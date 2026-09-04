@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Compare two JSON documents privately in your browser with ByteBench." />
+    <meta name="theme-color" content="#0b1220" />
+    <title>JSON Compare · ByteBench</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="ByteBench home">
+        <span class="brand-mark" aria-hidden="true">⌘</span>
+        <span><strong>ByteBench</strong><small>Your digital workbench</small></span>
+      </a>
+      <span class="header-note">Private by default</span>
+    </header>
+
+    <main class="page-shell compare-page">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Data &amp; developer tools <span aria-hidden="true">/</span> JSON</p>
+        <h1 id="page-title">JSON <span>Compare</span></h1>
+        <p class="lede">See what changed between two JSON documents without sending either one anywhere.</p>
+      </section>
+
+      <section class="tool-card" aria-labelledby="workspace-title">
+        <div class="tool-card-header">
+          <div><p class="section-kicker">Workspace</p><h2 id="workspace-title">Compare original and updated JSON</h2></div>
+          <button class="text-button" id="load-example" type="button">Load example <span aria-hidden="true">↗</span></button>
+        </div>
+
+        <div class="privacy-note" role="note">
+          <span class="privacy-icon" aria-hidden="true">✦</span>
+          <span><strong>Runs locally in your browser.</strong> Your documents are not uploaded, saved, or included in sharing.</span>
+        </div>
+
+        <div class="compare-editors">
+          <div class="panel compare-editor-panel">
+            <div class="panel-header"><label for="original-input">Original JSON</label><span class="panel-meta" id="original-count">0 characters</span></div>
+            <textarea id="original-input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="original-help" placeholder="Paste the original JSON…"></textarea>
+            <p class="field-help" id="original-help">The version you want to compare from.</p>
+          </div>
+          <div class="swap-control"><button class="swap-button" id="swap-json" type="button" aria-label="Swap original and updated JSON">⇄<span>Swap</span></button></div>
+          <div class="panel compare-editor-panel">
+            <div class="panel-header"><label for="updated-input">Updated JSON</label><span class="panel-meta" id="updated-count">0 characters</span></div>
+            <textarea id="updated-input" spellcheck="false" autocapitalize="off" autocomplete="off" aria-describedby="updated-help" placeholder="Paste the updated JSON…"></textarea>
+            <p class="field-help" id="updated-help">The version you want to compare to.</p>
+          </div>
+        </div>
+
+        <div class="compare-controls">
+          <button class="button button-primary" id="compare-json" type="button">Compare JSON <span aria-hidden="true">→</span></button>
+        </div>
+
+        <div class="comparison-result" aria-labelledby="result-title">
+          <div class="result-header"><div class="output-label"><span class="status-dot" id="status-dot" aria-hidden="true"></span><h2 id="result-title">Comparison result</h2></div><span class="panel-meta" id="result-meta">Waiting for input</span></div>
+          <div id="result-content" class="result-content" aria-live="polite"><p class="result-placeholder">Your comparison will appear here.</p></div>
+        </div>
+
+        <div class="utility-actions" aria-label="Comparison actions">
+          <button class="utility-button" id="copy-report" type="button" disabled><span aria-hidden="true">▣</span> Copy report</button>
+          <button class="utility-button" id="download-report" type="button" disabled><span aria-hidden="true">↓</span> Download report</button>
+          <button class="utility-button" id="share-tool" type="button"><span aria-hidden="true">↗</span> Share tool</button>
+          <button class="utility-button utility-button-muted" id="reset-tool" type="button"><span aria-hidden="true">↺</span> Reset</button>
+        </div>
+        <div class="status-message" id="status-message" role="status" aria-live="polite">Ready when you are.</div>
+      </section>
+
+      <section class="help-grid" aria-label="JSON comparison guidance">
+        <article class="info-card how-card">
+          <p class="section-kicker">Comparison rules</p><h2>Meaning over formatting</h2>
+          <ol class="steps-list">
+            <li><span>01</span><div><strong>Object order is ignored</strong><p>Reordering keys does not create a difference.</p></div></li>
+            <li><span>02</span><div><strong>Arrays stay ordered</strong><p>Moving an array item is a meaningful change.</p></div></li>
+            <li><span>03</span><div><strong>Every change has a path</strong><p>Find edits quickly with paths like <code>$.user.name</code> or <code>$.items[2]</code>.</p></div></li>
+          </ol>
+        </article>
+        <article class="info-card example-card">
+          <p class="section-kicker">Example</p><h2>Try a three-way change</h2>
+          <pre><code>Original                 Updated
+"version": 1             "version": 2
+"legacy": true            "newTool": "compare"</code></pre>
+          <p>Load the example to see a changed value, an added key, and a removed key in one report.</p>
+        </article>
+      </section>
+
+      <section class="faq-section" aria-labelledby="faq-title">
+        <div><p class="section-kicker">Good to know</p><h2 id="faq-title">Frequently asked questions</h2></div>
+        <div class="faq-list">
+          <details><summary>Does whitespace affect the result?</summary><p>No. Both documents are parsed before comparison, so spaces, line breaks, and object key order are ignored.</p></details>
+          <details><summary>How are arrays compared?</summary><p>Array order and position are significant. An item at <code>$.items[1]</code> is compared with the item at the same position in the other document.</p></details>
+          <details><summary>Can I share a comparison with someone?</summary><p>You can share the tool link, but document content is never placed in the URL. Copy or download the report locally when you need to send the result.</p></details>
+        </div>
+      </section>
+
+      <section class="related-section" aria-labelledby="related-title">
+        <div class="related-header"><div><p class="section-kicker">More from ByteBench</p><h2 id="related-title">Tools for the next step</h2></div><span class="coming-soon">In the workbench</span></div>
+        <div class="related-tools">
+          <a class="related-tool related-tool-link" href="./"><span class="tool-icon">⌘</span><div><strong>JSON Formatter</strong><p>Make one document readable and valid.</p></div><span class="arrow" aria-hidden="true">→</span></a>
+          <a class="related-tool related-tool-link" href="./minify.html"><span class="tool-icon">#</span><div><strong>JSON Minifier</strong><p>Remove whitespace for compact payloads.</p></div><span class="arrow" aria-hidden="true">→</span></a>
+          <div class="related-tool"><span class="tool-icon">↳</span><div><strong>Base64 Encoder</strong><p>Encode and decode text in a few clicks.</p></div><span class="arrow" aria-hidden="true">→</span></div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><span>© 2026 ByteBench</span><span>Useful tools. No account wall.</span></footer>
+    <script type="module" src="./src/compare-app.js"></script>
+  </body>
+</html>
